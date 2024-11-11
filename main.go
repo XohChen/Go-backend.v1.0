@@ -204,6 +204,10 @@ func deleteFreinds(w http.ResponseWriter, r *http.Request) {
 		if info.ID == id {
 			for i := 0; i < len(deleteFreindesOfUsers.Freindes); i++ {
 				index := getIndex(info.Freindes, deleteFreindesOfUsers.Freindes[i])
+				if index == -1 {
+					http.Error(w, "Index of array not found", http.StatusBadRequest)
+					continue
+				}
 				log.Printf("%d", index)
 				deleteElement(&infos[j], index)
 			}
